@@ -16,6 +16,7 @@ import br.ufpe.cin.exceptions.SemistructuredMergeException;
 import br.ufpe.cin.exceptions.TextualMergeException;
 import br.ufpe.cin.files.FilesManager;
 import br.ufpe.cin.mergers.util.MergeContext;
+import br.ufpe.cin.mergers.util.Side;
 import br.ufpe.cin.parser.JParser;
 import br.ufpe.cin.printers.Prettyprinter;
 import cide.gparser.ParseException;
@@ -130,6 +131,8 @@ public final class SemistructuredMerge {
 		
 		removeRemainingBaseNodes(mergeLeftBaseRight, context);
 		mergeMatchedContent(mergeLeftBaseRight, context);
+
+		identifyRenamingOrDeletionNodes(context);
 		
 		context.superImposedTree = mergeLeftBaseRight;
 		
@@ -383,6 +386,43 @@ public final class SemistructuredMerge {
 				context.editedLeftNodes.add(node);
 			}
 		}
+	}
+
+	private static void identifyRenamingOrDeletionNodes(MergeContext context) {
+		identifyRenamingOrDeletionNodes(context, Side.LEFT, context.addedLeftNodes, context.nodesDeletedByLeft);
+		identifyRenamingOrDeletionNodes(context, Side.RIGHT, context.addedRightNodes, context.nodesDeletedByRight);
+	}
+
+	private static void identifyRenamingOrDeletionNodes(MergeContext context, Side contribution, List<FSTNode> addedNodes, List<FSTNode> removedBaseNodes) {
+		for (FSTNode node : addedNodes) {
+			if(isRenamingWithoutBodyChanges(node, removedBaseNodes))
+				context.renamedWithoutBodyChangesNodes.add(Pair.of(contribution, node));
+			else if(isDeletionOrRenamingWithBodyChanges(node, removedBaseNodes))
+				context.deletedOrRenamedWithBodyChangesNodes.add(Pair.of(contribution, node));
+		}
+	}
+
+	private static boolean isRenamingWithoutBodyChanges(FSTNode node, List<FSTNode> removedBaseNodes) {
+		return isInBase() && !isNewNode() && matchesWithEqualBody();
+	}
+
+	private static boolean isDeletionOrRenamingWithBodyChanges(FSTNode node, List<FSTNode> removedBaseNodes) {
+		return isInBase() && !isNewNode() && !matchesWithEqualBody();
+	}
+
+	private static boolean isInBase() {
+		// TODO
+		return true;
+	}
+
+	private static boolean isNewNode() {
+		// TODO
+		return true;
+	}
+
+	private static boolean matchesWithEqualBody() {
+		// TODO
+		return true;
 	}
 	
 	/**
