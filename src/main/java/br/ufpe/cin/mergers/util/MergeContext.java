@@ -35,6 +35,9 @@ public class MergeContext {
 	public List<Pair<String,FSTNode>> possibleRenamedLeftNodes = new ArrayList<Pair<String,FSTNode>>();
 	public List<Pair<String,FSTNode>> possibleRenamedRightNodes= new ArrayList<Pair<String,FSTNode>>();
 
+	public List<Pair<Side, FSTNode>> renamedWithoutBodyChangesNodes = new ArrayList<Pair<Side,FSTNode>>();
+	public List<Pair<Side, FSTNode>> deletedOrRenamedWithBodyChangesNodes = new ArrayList<Pair<Side,FSTNode>>();
+
 	public List<FSTNode> editedLeftNodes = new ArrayList<FSTNode>(); 
 	public List<FSTNode> editedRightNodes= new ArrayList<FSTNode>();
 	
