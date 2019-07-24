@@ -221,17 +221,23 @@ public class RenamingUtils {
     }
 
     public static void runTextualMerge(MergeContext context, FSTNode leftNode, FSTNode baseNode, FSTNode rightNode, FSTNode mergeNode) throws TextualMergeException {
-        String leftContent = getNodeContent(leftNode);
-        String baseContent = getNodeContent(baseNode);
-        String rightContent = getNodeContent(rightNode);
 
-        String textualMergeContent = TextualMerge.merge(leftContent, baseContent, rightContent, JFSTMerge.isWhitespaceIgnored);
-        ((FSTTerminal) mergeNode).setBody(textualMergeContent);
+        String textualMergeBody = TextualMerge.merge(getNodeContent(leftNode), getNodeContent(baseNode), getNodeContent(rightNode), JFSTMerge.isWhitespaceIgnored);
+        String textualMergePrefix = TextualMerge.merge(getPrefix(leftNode), getPrefix(baseNode), getPrefix(rightNode), JFSTMerge.isWhitespaceIgnored);
+        
+        ((FSTTerminal) mergeNode).setBody(textualMergeBody);
+        ((FSTTerminal) mergeNode).setSpecialTokenPrefix(textualMergePrefix);        
 
         if(nodeHasConflict(mergeNode))
             context.renamingConflicts++;
 
         removeUnmmatchedNode(context.superImposedTree, leftNode, rightNode, mergeNode);
+    }
+
+    private static String getPrefix(FSTNode node) {
+        if (node == null)
+            return "";
+        return ((FSTTerminal) node).getSpecialTokenPrefix();
     }
 
     private static String getNodeContent(FSTNode node) {
