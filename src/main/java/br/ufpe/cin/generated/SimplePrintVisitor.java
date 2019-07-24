@@ -149,7 +149,12 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 			}
 			hintDecIndent();
 			hintNewLine();
-			printToken("}");
+			{
+				FSTNode v=getChild(nonTerminal, "ClassOrInterfaceBodyClosure");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
 			printFeatures(nonTerminal,false);
 			return false;
 		}
@@ -239,7 +244,12 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 			}
 			hintDecIndent();
 			hintNewLine();
-			printToken("}");
+			{
+				FSTNode v=getChild(nonTerminal, "ClassOrInterfaceBodyClosure");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
 			printFeatures(nonTerminal,false);
 			return false;
 		}
@@ -334,7 +344,12 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 			}
 			hintDecIndent();
 			hintNewLine();
-			printToken("}");
+			{
+				FSTNode v=getChild(nonTerminal, "ClassOrInterfaceBodyClosure");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
 			printFeatures(nonTerminal,false);
 			return false;
 		}
