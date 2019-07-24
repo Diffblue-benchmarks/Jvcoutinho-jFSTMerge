@@ -11,6 +11,7 @@ import br.ufpe.cin.util.TestUtils;
 import br.ufpe.cin.app.JFSTMerge;
 import br.ufpe.cin.files.FilesManager;
 import br.ufpe.cin.mergers.util.MergeContext;
+import br.ufpe.cin.mergers.util.RenamingStrategy;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -66,6 +67,7 @@ public class CommentsTest {
 
     @Test
     public void testComments_whenLeftAddsACommentJustBeforeMethod_andRightRenamesTheMethod_shouldReportConflict() {
+        JFSTMerge.renamingStrategy = RenamingStrategy.SAFE;
         File leftFile = new File("testfiles/comments/addandrenamecomments/left/Test.java");
         File baseFile = new File("testfiles/comments/addandrenamecomments/base/Test.java");
         File rightFile = new File("testfiles/comments/addandrenamecomments/right/Test.java");
