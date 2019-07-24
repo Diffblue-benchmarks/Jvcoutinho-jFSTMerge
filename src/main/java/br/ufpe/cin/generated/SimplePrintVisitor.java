@@ -143,12 +143,13 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 			printToken("{");
 			hintIncIndent();
 			hintNewLine();
+			hintNewLine();
 			for (FSTNode v : getChildren(nonTerminal,"ClassOrInterfaceBodyDeclaration")) {
 				v.accept(this);
 				hintNewLine();
+				hintNewLine();
 			}
 			hintDecIndent();
-			hintNewLine();
 			{
 				FSTNode v=getChild(nonTerminal, "ClassOrInterfaceBodyClosure");
 				if (v!=null) {
@@ -238,12 +239,13 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 			printToken("{");
 			hintIncIndent();
 			hintNewLine();
+			hintNewLine();
 			for (FSTNode v : getChildren(nonTerminal,"ClassOrInterfaceBodyDeclaration")) {
 				v.accept(this);
 				hintNewLine();
+				hintNewLine();
 			}
 			hintDecIndent();
-			hintNewLine();
 			{
 				FSTNode v=getChild(nonTerminal, "ClassOrInterfaceBodyClosure");
 				if (v!=null) {
@@ -338,12 +340,13 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 			printToken("{");
 			hintIncIndent();
 			hintNewLine();
+			hintNewLine();
 			for (FSTNode v : getChildren(nonTerminal,"ClassOrInterfaceBodyDeclaration")) {
 				v.accept(this);
 				hintNewLine();
+				hintNewLine();
 			}
 			hintDecIndent();
-			hintNewLine();
 			{
 				FSTNode v=getChild(nonTerminal, "ClassOrInterfaceBodyClosure");
 				if (v!=null) {
