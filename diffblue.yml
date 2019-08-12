@@ -1,3 +1,5 @@
+buildCmd: ./gradlew compileJava -x test
+testCmd: ./gradlew test -x compileJava
 # Copyright 2019 Diffblue Limited. All Rights Reserved.
 cbmcArguments:
   # Do not generate coverage comments on generated tests.
